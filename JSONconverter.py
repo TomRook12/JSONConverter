@@ -1,13 +1,11 @@
 import pandas as pd
 import os
 
-
-'''with open('data.json', encoding='utf-8') as inputfile:
-    df = pd.read_json(inputfile)
-'''
 d = {"participant":
          [],
      "affiliation":
+         [],
+     "time/distance":
          [],
      "avg_pace":
          [],
@@ -15,13 +13,21 @@ d = {"participant":
          [],
      }
 
+def json_opener(json_file):
+    with open(json_file, encoding='utf-8') as inputfile:
+        df = pd.read_json(inputfile)
+    return(df)
+
 def validity_checker(data,i):
     if data["results"]["participants"][i]["affiliation"] == "EMPT":
+        return False
+    if data['results']["participants"][i]["avg_pace"] == "0:00.0":
         return False
     if data["results"]["participants"][i]["machine_type"] != "row":
         return False
     else:
         return True
+
 
 def result_creator(data):
     x = len(data["results"]["participants"])
@@ -29,21 +35,18 @@ def result_creator(data):
         if validity_checker(data, i):
             d["participant"].append(data["results"]["participants"][i]["participant"])
             d["affiliation"].append(data["results"]["participants"][i]["affiliation"])
+            d["time/distance"].append(data["results"]["duration"])
             d["avg_pace"].append(data['results']["participants"][i]["avg_pace"])
             d["score"].append(data["results"]["participants"][i]["score"])
     return d
 
-files = [f for f in os.listdir("JSON")]
-print(files)
-race = {}
+
+files = [f for f in os.listdir(".") if os.path.isfile(f)]
 for f in files:
-    print(f)
     if f.endswith(".json"):
-        with open(f, encoding='utf-8') as inputfile:
-            df = pd.read_json(inputfile)
-            print(df)
+        table = pd.DataFrame.from_dict(result_creator(json_opener(f)))
 
-
+table.to_csv("data.csv")
 
 
 
