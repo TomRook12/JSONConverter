@@ -1,7 +1,14 @@
-<MyLayout>
+<Root>
+    text_input: text_input
+
     BoxLayout:
         orientation: "vertical"
-        size: root.width, root.height
-
-        padding: 50
-        spacing: 20
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+                Button:
+                    text: "Open"
+                    on_release: root.show_open()
+                Button:
+                    text: "Export"
+                    on_release: root.show_export()
