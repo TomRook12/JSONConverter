@@ -1,4 +1,4 @@
-<Root>
+Root:
     text_input: text_input
 
     BoxLayout:
@@ -12,3 +12,20 @@
                 Button:
                     text: "Export"
                     on_release: root.show_export()
+    BoxLayout:
+        TextInput:
+            id: text_input
+            text: ""
+
+        RstDocument
+            text: text_input.text
+            show_errors: True
+
+<ExportDialog>:
+    BoxLayout:
+
+
+<OpenDialog>:
+    BoxLayout:
+
+#https://stackoverflow.com/questions/67034577/kivy-typeerror-nonetype-object-is-not-subscriptable-in-python

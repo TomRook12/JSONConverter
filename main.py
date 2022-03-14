@@ -11,35 +11,34 @@ import os
 
 Window.size = (1920, 1080)
 
-class LoadDialog(FloatLayout):
-    load = ObjectProperty(None)
+class OpenDialog(FloatLayout):
+    export = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
 
-class SaveDialog(FloatLayout):
+class ExportDialog(FloatLayout):
     save = ObjectProperty(None)
     text_input = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
 class Root(FloatLayout):
-    loadfile = ObjectProperty(None)
-    savefile = ObjectProperty(None)
+    openfile = ObjectProperty(None)
+    exportfile = ObjectProperty(None)
     text_input = ObjectProperty(None)
 
-    def selected(self, filename):
-        try:
-            self.ids.my_image.source = filename[0]
-            #print(filename[0])
+    def show_open(self):
+        pass
 
-        except:
-            pass
+    def show_export(self):
+        pass
+
 
 class ConverterApp(App):
     pass
 
 Factory.register('Root', cls=Root)
-Factory.register('LoadDialog', cls=LoadDialog)
-Factory.register('SaveDialog', cls=SaveDialog)
+Factory.register('LoadDialog', cls=OpenDialog)
+Factory.register('SaveDialog', cls=ExportDialog)
 
 if __name__ == "__main__":
     ConverterApp().run()
