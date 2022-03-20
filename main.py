@@ -27,18 +27,22 @@ class Root(FloatLayout):
     text_input = ObjectProperty(None)
 
     def show_open(self):
-        pass
+        content = OpenDialog(open=self.open, cancel = self.dismiss_popup)
+        self._popup(title="Open File", content=content,
+                    size_hint=(0.9, 0.9))
 
     def show_export(self):
-        pass
+        content = ExportDialog(export=self.export, cancel=self.dismiss_popup)
+        self._popup = popup(title="Export File", content=content,
+                            size_hint=(0.9,0.9))
 
 
 class ConverterApp(App):
     pass
 
 Factory.register('Root', cls=Root)
-Factory.register('LoadDialog', cls=OpenDialog)
-Factory.register('SaveDialog', cls=ExportDialog)
+Factory.register('OpenDialog', cls=OpenDialog)
+Factory.register('ExportDialog', cls=ExportDialog)
 
 if __name__ == "__main__":
     ConverterApp().run()
