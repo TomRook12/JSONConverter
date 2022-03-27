@@ -48,10 +48,5 @@ for f in files:
 
 table.to_csv("data.csv")
 
-"""table = pd.DataFrame.from_dict(folder_reader(df))
-print(table)
 
-table.to_csv("data.csv")
-
-"""
 
